@@ -1,3 +1,3 @@
 # better-todo
 
-Todo practice, testing, own abstractions, styling, etc.
+Todo practice, testing, own abstractions, styling, etc. - incomplete
