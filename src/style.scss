@@ -1,0 +1,414 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@mixin flex($alignment, $justify: flex-start, $direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $alignment;
+  justify-content: $justify;
+}
+
+$success: #15bc1c;
+$warning: #ffdd29;
+$danger: #ff2929;
+$hold: #333333;
+$todo: #2945ff;
+$color-primary: #faad00;
+$text-light: #fff;
+$bg-dark: #1a160a;
+$bg-light: #231e10;
+
+$space-medium: 1.6rem;
+$space-large: 3.2rem;
+$space-xlarge: 6.4rem;
+
+$color-grey-dark: #777;
+$color-white: #fff;
+$color-black: #000;
+
+@keyframes open {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.05) translate(-50%, -50%);
+  }
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes moveUp {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes moveLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(3rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+  text-decoration: none;
+  list-style: none;
+}
+
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a {
+  overflow-wrap: break-word;
+}
+
+body {
+  display: grid;
+  place-items: center;
+
+  background-color: $bg-dark;
+  color: $text-light;
+
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.7;
+
+  padding: 5rem 2rem;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: rgba($color-black, 0.3);
+
+  min-height: 100vh;
+  width: 100%;
+
+  z-index: 100;
+}
+
+.btn {
+  background: none;
+  color: $color-primary;
+
+  border: 0;
+  border-bottom: 2px solid $color-primary;
+  border-radius: 3px;
+
+  width: max-content;
+
+  padding: 0.5rem;
+
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 1rem rgba($color-primary, 0.2);
+  }
+
+  &:active {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba($color-primary, 0.2);
+  }
+}
+
+#content {
+  background-color: $bg-light;
+
+  border-radius: 0.4rem;
+
+  width: 100%;
+  max-width: 50rem;
+
+  padding: 2rem;
+
+  box-shadow: 0 0 5rem rgba($color-black, 0.3);
+  transition: all 0.3s ease-out;
+
+  & > div:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  &:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 0 5rem rgba($color-black, 0.6);
+  }
+}
+
+.current-date {
+  text-align: center;
+
+  &__text {
+    color: $color-primary;
+
+    font-size: 4rem;
+    font-weight: 700;
+  }
+}
+
+.buttons {
+  @include flex(center);
+  gap: 1rem;
+
+  &__delete {
+    color: $danger;
+
+    border-bottom: 2px solid $danger;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 1rem rgba($danger, 0.2);
+    }
+
+    &:active {
+      transform: scale(1);
+      box-shadow: 0 0 0 rgba($danger, 0.2);
+    }
+  }
+}
+
+.tasks {
+  @include flex(flex-start, flex-start, column);
+  gap: 1rem;
+}
+
+[status='todo'] {
+  background: $todo;
+}
+
+[status='done'] {
+  background: $success;
+}
+
+[status='hold'] {
+  background: $hold;
+}
+
+[status='in-progress'] {
+  background: $warning;
+  color: $bg-dark;
+}
+
+[status='important'] {
+  background: $danger;
+  color: $bg-dark;
+}
+
+.task {
+  width: 100%;
+
+  animation: moveUp 0.3s ease-out;
+
+  @include flex(center, space-between);
+
+  &__info {
+    position: relative;
+
+    max-width: 60%;
+
+    > * {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    h5 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      position: relative;
+
+      font-size: 1rem;
+      color: darken($color-white, 20%);
+
+      cursor: pointer;
+    }
+  }
+
+  &__menu {
+    @include flex(center);
+    gap: 1rem;
+
+    &-status {
+      position: relative;
+
+      font-weight: 700;
+      text-transform: uppercase;
+
+      border-radius: 0.4rem;
+
+      padding: 0.3rem 1rem;
+
+      cursor: pointer;
+    }
+
+    &-option {
+      position: relative;
+
+      font-size: 1.5rem;
+
+      cursor: pointer;
+    }
+  }
+}
+
+.modal {
+  position: absolute;
+  right: 0;
+  top: 3rem;
+
+  background: $bg-dark;
+  font-size: 1.3rem;
+
+  outline: 0;
+  border-radius: 3px;
+
+  width: max-content;
+  padding: 1rem;
+
+  box-shadow: 0 0 1rem rgba($color-black, 0.4);
+  z-index: 10;
+
+  animation: moveLeft 0.4s forwards;
+
+  @include flex(center, flex-start, column);
+  gap: 1rem;
+
+  > div {
+    width: 100%;
+
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    @include flex(center);
+    gap: 1rem;
+
+    & * {
+      pointer-events: none;
+    }
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  &__status {
+    & * {
+      text-shadow: 1px 1px rgba($text-light, 0.3);
+    }
+
+    &-todo {
+      color: $todo;
+    }
+
+    &-hold {
+      color: $hold;
+    }
+
+    &-done {
+      color: $success;
+    }
+
+    &-in-progress {
+      color: $warning;
+    }
+
+    &-important {
+      color: $danger;
+    }
+  }
+}
+
+.form {
+  position: fixed;
+  top: 35%;
+  left: 50%;
+
+  background-color: $bg-dark;
+
+  border-radius: 3px;
+
+  padding: 1.5rem;
+
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 1rem rgba($color-black, 0.3);
+  animation: open 0.3s ease-out forwards;
+  z-index: 1000;
+
+  @include flex(flex-start, flex-start, column);
+  gap: 1.5rem;
+
+  > * {
+    animation: moveUp 0.5s ease-out 0.1s backwards;
+  }
+}
+
+.form-control {
+  width: 100%;
+
+  &__title {
+    color: $color-primary;
+  }
+
+  &__input {
+    background-color: $bg-light;
+    color: $text-light;
+
+    outline: 0;
+    border: 0;
+    border-radius: 0.4rem;
+
+    width: 100%;
+
+    padding: 0.4rem;
+  }
+}
+
+.close {
+  animation: close 0.3s ease-out forwards;
+}
+
+.add-task {
+  & * {
+    pointer-events: none;
+  }
+}
