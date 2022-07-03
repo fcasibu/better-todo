@@ -17,11 +17,6 @@ $text-light: #fff;
 $bg-dark: #1a160a;
 $bg-light: #231e10;
 
-$space-medium: 1.6rem;
-$space-large: 3.2rem;
-$space-xlarge: 6.4rem;
-
-$color-grey-dark: #777;
 $color-white: #fff;
 $color-black: #000;
 
@@ -258,7 +253,7 @@ body {
       position: relative;
 
       font-size: 1rem;
-      color: darken($color-white, 20%);
+      color: darken($color-white, 30%);
 
       cursor: pointer;
     }
