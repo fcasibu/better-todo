@@ -27,7 +27,6 @@ export const initializeEventHandlers = () => {
           name: inputs[0].value,
           description: inputs[1].value,
           createdAt: inputs[2].value,
-          status: Status.TODO,
           _id: (e.target as HTMLButtonElement).id
         });
       }
