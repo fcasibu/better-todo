@@ -18,14 +18,12 @@ module.exports = {
     'func-names': 'off',
     'object-shorthand': 'off',
     'no-param-reassign': 'off',
+    'no-undef': 'off',
     'no-return-await': 'off',
     'no-underscore-dangle': 'off',
-    settings: {
-      'import/resolver': {
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx']
-        }
-      }
-    }
+    'no-await-in-loop': 'off',
+    'import/extensions': 'off',
+    'import/no-unresolved': 'off',
+    'import/prefer-default-export': 'off'
   }
 };

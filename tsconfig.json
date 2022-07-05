@@ -5,8 +5,8 @@
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "module": "es6",
-    "target": "es5",
+    "module": "ES2015",
+    "target": "ES2016",
     "strict": true,
     "jsx": "react",
     "allowJs": true
